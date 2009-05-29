@@ -30,7 +30,7 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = jshelper$(EXEEXT)
+bin_PROGRAMS = bin/jshelper$(EXEEXT)
 subdir = .
 DIST_COMMON = $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/config.h.in \
@@ -48,9 +48,10 @@ CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
-am_jshelper_OBJECTS = jshelper.$(OBJEXT)
-jshelper_OBJECTS = $(am_jshelper_OBJECTS)
-jshelper_LDADD = $(LDADD)
+am_bin_jshelper_OBJECTS = jshelper.$(OBJEXT)
+bin_jshelper_OBJECTS = $(am_bin_jshelper_OBJECTS)
+bin_jshelper_LDADD = $(LDADD)
+am__dirstamp = $(am__leading_dot)dirstamp
 DEFAULT_INCLUDES = -I.
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -58,8 +59,8 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(jshelper_SOURCES)
-DIST_SOURCES = $(jshelper_SOURCES)
+SOURCES = $(bin_jshelper_SOURCES)
+DIST_SOURCES = $(bin_jshelper_SOURCES)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -159,7 +160,7 @@ target_alias =
 top_builddir = .
 top_srcdir = .
 AUTOMAKE_OPTIONS = foreign
-jshelper_SOURCES = src/jshelper.c
+bin_jshelper_SOURCES = src/jshelper.c
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -238,9 +239,12 @@ uninstall-binPROGRAMS:
 
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
-jshelper$(EXEEXT): $(jshelper_OBJECTS) $(jshelper_DEPENDENCIES) 
-	@rm -f jshelper$(EXEEXT)
-	$(LINK) $(jshelper_OBJECTS) $(jshelper_LDADD) $(LIBS)
+bin/$(am__dirstamp):
+	@$(MKDIR_P) bin
+	@: > bin/$(am__dirstamp)
+bin/jshelper$(EXEEXT): $(bin_jshelper_OBJECTS) $(bin_jshelper_DEPENDENCIES) bin/$(am__dirstamp)
+	@rm -f bin/jshelper$(EXEEXT)
+	$(LINK) $(bin_jshelper_OBJECTS) $(bin_jshelper_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -478,6 +482,7 @@ clean-generic:
 
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
+	-rm -f bin/$(am__dirstamp)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
