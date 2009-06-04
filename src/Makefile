@@ -75,7 +75,7 @@ MAKEINFO = ${SHELL} /Users/kurt/Documents/Projects/erl-spidermonkey/missing --ru
 MKDIR_P = .././install-sh -c -d
 OBJEXT = o
 PACKAGE = erl-spidermonkey
-PACKAGE_BUGREPORT = mrkurt@gmail.com
+PACKAGE_BUGREPORT = 
 PACKAGE_NAME = erl-spidermonkey
 PACKAGE_STRING = erl-spidermonkey 0.1
 PACKAGE_TARNAME = erl-spidermonkey
@@ -138,9 +138,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  src/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign  src/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  src/Makefile
+	  $(AUTOMAKE) --foreign  src/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \

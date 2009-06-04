@@ -60,5 +60,7 @@ AC_TYPE_SIZE_T
 
 # Checks for library functions.
 
+AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([src/Makefile])
+AC_CONFIG_FILES([src/spidermonkey/Makefile])
 AC_OUTPUT
