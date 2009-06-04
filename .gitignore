@@ -5,3 +5,4 @@ missing
 stamp-h1
 Makefile
 .deps
+src/spidermonkey/jshelper
